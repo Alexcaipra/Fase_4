@@ -11,11 +11,11 @@ class Cliente(Entidad):
 
     def __init__(self, nombre_cliente, numero_identificacion, numero_celular):
         # Inicializa los atributos privados del cliente.
-        self.__nombre_cliente = str(nombre_cliente)
-        self.__numero_identificacion = str(numero_identificacion)
-        self.__numero_celular = str(numero_celular)
+        self.__nombre_cliente = nombre_cliente
+        self.__numero_identificacion = numero_identificacion
+        self.__numero_celular = numero_celular
 
-    # Métodos getters: permiten consultar los atributos privados.
+    # Métodos getters: permiten acceder a los valores de los atributos privados.
 
     def get_nombre_cliente(self):
         return self.__nombre_cliente
@@ -40,67 +40,56 @@ class Cliente(Entidad):
         datos_validos = True
 
         # Validación del nombre del cliente.
-        if not self.__nombre_cliente or not self.__nombre_cliente.strip():
-            print("El nombre no puede estar vacío")
+        if not isinstance(self.__nombre_cliente, str):
+            print("El nombre debe ser texto.")
             datos_validos = False
 
-        elif self.__nombre_cliente.isdigit():
-            print("El nombre no puede contener solamente números")
+        elif not self.__nombre_cliente.strip():
+            print("El nombre no puede estar vacío.")
+            datos_validos = False
+
+        elif any(caracter.isdigit() for caracter in self.__nombre_cliente):
+            print("El nombre no puede contener números.")
             datos_validos = False
 
         # Validación del número de identificación.
-        if not self.__numero_identificacion or not self.__numero_identificacion.strip():
-            print("El numero de identificacion no puede estar vacío")
+        if not isinstance(self.__numero_identificacion, str):
+            print("La identificación debe ser texto.")
+            datos_validos = False
+
+        elif not self.__numero_identificacion.strip():
+            print("La identificación no puede estar vacía.")
             datos_validos = False
 
         elif not self.__numero_identificacion.isdigit():
-            print("El numero de identificacion solo debe tener numeros")
+            print("La identificación solo debe contener números.")
             datos_validos = False
 
         # Validación del número de celular.
-        if not self.__numero_celular or not self.__numero_celular.strip():
-            print("El numero de celular no puede estar vacío")
+        if not isinstance(self.__numero_celular, str):
+            print("El celular debe ser texto.")
+            datos_validos = False
+
+        elif not self.__numero_celular.strip():
+            print("El celular no puede estar vacío.")
             datos_validos = False
 
         elif not self.__numero_celular.isdigit():
-            print("El numero de celular solo debe tener numeros")
+            print("El celular solo debe contener números.")
             datos_validos = False
 
         elif len(self.__numero_celular) != 10:
-            print("El número de celular debe tener 10 dígitos")
+            print("El celular debe tener 10 dígitos.")
             datos_validos = False
 
         # Retorna el resultado general de todas las validaciones.
         return datos_validos
     
-
     def mostrar_informacion(self):
         """
         Muestra en pantalla la información personal del cliente:
         nombre, número de identificación y número de celular.
         """
-
         print(f"Nombre: {self.__nombre_cliente}")
         print(f"Identificación: {self.__numero_identificacion}")
         print(f"Celular: {self.__numero_celular}")
-
-        
-
-
-
-
-if __name__ == "__main__":
-    
-    cliente1 = Cliente("Carlos", "123456789", "3001234567")
-
-    if cliente1.validar_datos():
-        cliente1.mostrar_informacion()
-    else:
-        print("No se pudo registrar el cliente.")
-
-    cliente2 = Cliente("Carlos", "123456789.", "3001234567")
-
-    if cliente2.validar_datos():
-        cliente2.mostrar_informacion()
-    else:
-        print("No se pudo registrar el cliente.")
