@@ -6,12 +6,13 @@ class Servicio(Entidad, ABC):
     Clase abstracta que representa un servicio general.
     Hereda de Entidad.
     """
-    def __init__(self, tarifa_por_hora):
-        self.tarifa_por_hora = tarifa_por_hora
-        self.opcion_seleccionada = None
+    def __init__(self, duracion):
 
+        # Almacena la duración del servicio en horas.
+        self.duracion = duracion
+   
     @abstractmethod
-    def calcular_costo(self, duracion):
+    def calcular_costo(self):
         """Calcula el costo del servicio según la duración."""
         pass
 
@@ -29,72 +30,108 @@ class Servicio(Entidad, ABC):
         """Muestra la descripción del servicio."""
         print(f"Servicio: {self.describir_servicio()}")
 
+    def obtener_duracion(self):
+        #retorna la duraccion del servicio en horas
+        return self.duracion
+
 
 class AlquilerEquipo(Servicio):
-    def __init__(self, tarifa_por_hora):
-        super().__init__(tarifa_por_hora)
-        # Lista de 5 equipos disponibles
-        self.equipos = ["Cámara de video", "Proyector", "Laptop HP", "Micrófono", "Consola"]
+    def __init__(self, opcion_seleccionada, duracion):
+        super().__init__(duracion)
+        self.opcion_seleccionada = opcion_seleccionada
+        self.duracion = duracion
 
-    def consultar_equipos_disponibles(self):
-        return self.equipos
-
-    def calcular_costo(self, duracion):
-        if self.validar_parametros() and duracion > 0:
-            return self.tarifa_por_hora * duracion
-        return 0.0
-
-    def describir_servicio(self):
-        if self.opcion_seleccionada:
-            return f"Alquiler de {self.opcion_seleccionada}"
-        return "Alquiler de Equipo (No seleccionado)"
+        # Diccionario con equipos y precios
+        self.equipos = { 
+            "Cámara de video": 25000, "Proyector": 15000, "Laptop HP": 20000, "Micrófono": 8000, "Consola": 18000
+            }
 
     def validar_parametros(self):
-        return self.opcion_seleccionada in self.equipos
+            #Verifica si el equipo seleccionado existe en el diccionario
+            return self.opcion_seleccionada in self.equipos
+
+    def describir_servicio(self):
+        #Retorna la descripción del alquiler del equipo seleccionado
+        return f"Alquiler de {self.opcion_seleccionada}"        
+
+    def calcular_costo(self):
+        #Calcula el costo del alquiler según la tarifa y la duración
+        if self.validar_parametros():
+            precio = self.equipos[self.opcion_seleccionada]
+            return precio * self.duracion
+
+        return 0.0
+    
+    def consultar_equipos_disponibles(self):
+        #Retorna el catálogo de equipos con sus tarifas por hora
+        return self.equipos
+    
 
 
 class AsesoriaEspecializada(Servicio):
-    def __init__(self, tarifa_por_hora):
-        super().__init__(tarifa_por_hora)
-        # Lista de asesorías
-        self.asesorias = ["Fotografía", "Programación", "Redes", "Bases de datos", "Marketing"]
+    def __init__(self, opcion_seleccionada, duracion):
+        super().__init__(duracion)
+        self.opcion_seleccionada = opcion_seleccionada
+        self.duracion = duracion
 
-    def consultar_asesorias_disponibles(self):
-        return self.asesorias
-
-    def calcular_costo(self, duracion):
-        if self.validar_parametros() and duracion > 0:
-            return self.tarifa_por_hora * duracion
-        return 0.0
-
-    def describir_servicio(self):
-        if self.opcion_seleccionada:
-            return f"Asesoría en {self.opcion_seleccionada}"
-        return "Asesoría Especializada (No seleccionada)"
+        ## Diccionario con asesorias y precios
+        self.asesorias = {
+            "Asesoría en programación": 40000, "Asesoría en electrónica": 35000, "Asesoría en automatización": 50000, 
+            "Asesoría en redes": 30000, "Asesoría en instrumentación industrial": 45000
+            }
 
     def validar_parametros(self):
+        #Verifica si la asesoria seleccionada existe en el diccionario
         return self.opcion_seleccionada in self.asesorias
+
+    def describir_servicio(self):
+           #Retorna la descripción de la asesoria seleccionado
+           return self.opcion_seleccionada
+             
+    def calcular_costo(self):
+        #Calcula el costo de la asesoria según la tarifa y la duración
+        if self.validar_parametros():
+            precio = self.asesorias[self.opcion_seleccionada]
+            return precio*self.duracion
+        return 0.0
+
+    def consultar_asesorias_disponibles(self):
+         #Retorna el catálogo de asesorias con sus tarifas por hora
+        return self.asesorias
 
 
 class ReservaSala(Servicio):
-    def __init__(self, tarifa_por_hora):
-        super().__init__(tarifa_por_hora)
-        # Lista de salas
-        self.salas = ["Sala Grande", "Sala Pequeña", "Sala VIP", "Sala de Juntas", "Auditorio"]
+    def __init__(self, opcion_seleccionada, duracion):
+        super().__init__(duracion)
+        self.opcion_seleccionada = opcion_seleccionada
+        self.duracion = duracion
 
-    def consultar_salas_disponibles(self):
-        return self.salas
-
-    def calcular_costo(self, duracion):
-        if self.validar_parametros() and duracion > 0:
-            return self.tarifa_por_hora * duracion
-        return 0.0
-
-    def describir_servicio(self):
-        if self.opcion_seleccionada:
-            return f"Reserva de {self.opcion_seleccionada}"
-        return "Reserva de Sala (No seleccionada)"
+        ## Diccionario con salas y precios
+        self.salas = {
+            "Sala Grande": 80000, "Sala Pequeña": 40000, "Sala VIP": 100000, "Sala de Juntas": 60000, 
+            "Auditorio": 150000
+            }
 
     def validar_parametros(self):
+        #Verifica si la sala seleccionada existe en el diccionario
         return self.opcion_seleccionada in self.salas
-      
+
+    def describir_servicio(self):
+        #Retorna la descripción de la sala seleccionada
+        return self.opcion_seleccionada
+
+    def calcular_costo(self):
+        #Calcula el costo del alquiler de la sala según la tarifa y la duración
+        if self.validar_parametros():
+            precio = self.salas[self.opcion_seleccionada]
+            return precio*self.duracion
+        return 0.0
+        
+    def consultar_salas_disponibles(self):
+         #Retorna el catálogo de salas con sus tarifas por hora
+        return self.salas
+
+    
+
+
+   
