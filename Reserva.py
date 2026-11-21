@@ -21,12 +21,15 @@ class Reserva:
     
 
     def calcular_total(self):
-        """Solicita al servicio el cálculo del costo y lo almacena."""
-        if self.validar_reserva():
-            self.__costo_total = self.__servicio.calcular_costo()
-            return self.__costo_total
-        else:
-            raise ValueError("No se pudo calcular el costo: Reserva inválida.")
+        """Calcula y almacena el costo; lanza ValueError si la reserva no es valida."""
+        if not self.validar_reserva():
+            raise ValueError("No se pudo calcular el costo: reserva invalida.")
+        costo = self.__servicio.calcular_costo()
+        if costo is None or costo < 0:
+            raise ValueError("El servicio devolvio un costo invalido.")
+        self.__costo_total = costo
+        return self.__costo_total
+
 
     def mostrar_resumen(self):
         """Muestra el resumen de la reserva con los datos del cliente y servicio"""
@@ -45,54 +48,22 @@ class Reserva:
             return True
         return False
 
+    def rechazar_reserva(self):
+        """Rechaza una reserva que siga pendiente."""
+        if self.__estado == "Pendiente":
+            self.__estado = "Rechazada"
+            return True
+        return False
+
     def cancelar_reserva(self):
         """Cancela la reserva si todavía no ha sido cancelada."""
         if self.__estado !="Cancelada":
             self.__estado = "Cancelada"
             return True
         return False
+
+    def obtener_estado(self):
+        """Retorna el estado actual de la reserva."""
+        return self.__estado
             
 
-if __name__ == "__main__":
-
-    from Cliente import Cliente
-    from Servicio import AlquilerEquipo
-
-    # Crear cliente de prueba
-    cliente = Cliente("Carlos Pérez", "1234567890", "3001234567")
-
-    # Crear servicio de prueba (opción y duración)
-    servicio = AlquilerEquipo("Proyector", 2)
-
-    # Crear reserva
-    reserva = Reserva(cliente, servicio)
-
-    # Prueba de validación
-    print("\n--- PRUEBA DE VALIDACIÓN ---")
-    print("Reserva válida:", reserva.validar_reserva())
-    print("\n--- PRUEBA DE CÁLCULO ---")
-    print("Costo calculado:", reserva.calcular_total())
-    print("\n--- PRUEBA DE CONFIRMACIÓN ---")
-    print("Reserva confirmada:", reserva.confirmar_reserva())
-    print("\n--- PRUEBA DE CANCELACIÓN ---")
-    print("Reserva cancelada:", reserva.cancelar_reserva())
-    print("Cancelar nuevamente:", reserva.cancelar_reserva())
-    print("\n--- PRUEBA DEL RESUMEN ---")
-    reserva.mostrar_resumen()   
-
-    print("\n--- PRUEBAS NEGATIVAS ---")
-
-    # Reserva sin cliente
-    reserva_sin_cliente = Reserva(None, servicio)
-    print("Reserva sin cliente:", reserva_sin_cliente.validar_reserva())
-
-    # Reserva sin servicio
-    reserva_sin_servicio = Reserva(cliente, None)
-    print("Reserva sin servicio:", reserva_sin_servicio.validar_reserva())
-
-    # Intentar calcular costo de una reserva inválida
-    try:
-        reserva_sin_cliente.calcular_total()
-    except ValueError as error:
-        print("Error capturado:", error)
-    pass

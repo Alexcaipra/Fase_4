@@ -36,15 +36,16 @@ class Servicio(Entidad, ABC):
 
 
 class AlquilerEquipo(Servicio):
+    
+    # Diccionario con equipos y precios
+    equipos = { 
+        "Cámara de video": 25000, "Proyector": 15000, "Laptop HP": 20000, "Micrófono": 8000, "Consola": 18000
+        }
+    
     def __init__(self, opcion_seleccionada, duracion):
         super().__init__(duracion)
         self.opcion_seleccionada = opcion_seleccionada
         self.duracion = duracion
-
-        # Diccionario con equipos y precios
-        self.equipos = { 
-            "Cámara de video": 25000, "Proyector": 15000, "Laptop HP": 20000, "Micrófono": 8000, "Consola": 18000
-            }
 
     def validar_parametros(self):
             #Verifica si el equipo seleccionado existe en el diccionario
@@ -69,16 +70,18 @@ class AlquilerEquipo(Servicio):
 
 
 class AsesoriaEspecializada(Servicio):
+
+## Diccionario con asesorias y precios
+    asesorias = {
+        "Asesoría en programación": 40000, "Asesoría en electrónica": 35000, "Asesoría en automatización": 50000, 
+        "Asesoría en redes": 30000, "Asesoría en instrumentación industrial": 45000
+        }
+    
     def __init__(self, opcion_seleccionada, duracion):
         super().__init__(duracion)
         self.opcion_seleccionada = opcion_seleccionada
         self.duracion = duracion
 
-        ## Diccionario con asesorias y precios
-        self.asesorias = {
-            "Asesoría en programación": 40000, "Asesoría en electrónica": 35000, "Asesoría en automatización": 50000, 
-            "Asesoría en redes": 30000, "Asesoría en instrumentación industrial": 45000
-            }
 
     def validar_parametros(self):
         #Verifica si la asesoria seleccionada existe en el diccionario
@@ -101,16 +104,18 @@ class AsesoriaEspecializada(Servicio):
 
 
 class ReservaSala(Servicio):
+
+    ## Diccionario con salas y precios
+    salas = {
+        "Sala Grande": 80000, "Sala Pequeña": 40000, "Sala VIP": 100000, "Sala de Juntas": 60000, 
+        "Auditorio": 150000
+        }
+    
     def __init__(self, opcion_seleccionada, duracion):
         super().__init__(duracion)
         self.opcion_seleccionada = opcion_seleccionada
         self.duracion = duracion
 
-        ## Diccionario con salas y precios
-        self.salas = {
-            "Sala Grande": 80000, "Sala Pequeña": 40000, "Sala VIP": 100000, "Sala de Juntas": 60000, 
-            "Auditorio": 150000
-            }
 
     def validar_parametros(self):
         #Verifica si la sala seleccionada existe en el diccionario
