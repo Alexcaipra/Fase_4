@@ -127,8 +127,13 @@ def mostrar_servicios_disponibles(categoria):
 def solicitar_duracion():
     """Solicita la duración en horas; permite cancelar con C."""
     while True:
-        entrada = input("Ingrese la duración en horas (o C para cancelar): ").strip().lower()
-
+        print("\n----------------------------------------")
+        print("          DURACIÓN DEL SERVICIO")
+        print("----------------------------------------")
+        print("Ingrese la duración en horas.")
+        print("Escriba C para cancelar la operación.\n")
+        entrada = input("Duración: ").strip().lower()
+        
         if entrada == "c":
             return None
 
