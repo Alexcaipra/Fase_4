@@ -1,0 +1,22 @@
+2026-11-21 22:57:28,319 | INFO | Reserva confirmada. Servicio=Alquiler de Cámara de video costo=50000.0
+2026-11-21 22:57:28,320 | INFO | Flujo de reserva finalizado sin excepciones
+2026-11-21 22:57:28,320 | INFO | Finalizó un intento de reserva
+2026-11-21 22:58:27,613 | INFO | Reserva confirmada. Servicio=Asesoría en programación costo=120000.0
+2026-11-21 22:58:27,613 | INFO | Flujo de reserva finalizado sin excepciones
+2026-11-21 22:58:27,613 | INFO | Finalizó un intento de reserva
+2026-11-21 22:59:56,833 | INFO | Usuario canceló al ingresar la duración
+2026-11-21 22:59:56,834 | INFO | Finalizó un intento de reserva
+2026-11-21 23:00:58,486 | INFO | Usuario canceló al ingresar la duración
+2026-11-21 23:00:58,518 | INFO | Finalizó un intento de reserva
+2026-11-21 23:01:49,548 | INFO | Reserva rechazada por el usuario. Servicio=Sala Pequeña
+2026-11-21 23:01:49,549 | INFO | Flujo de reserva finalizado sin excepciones
+2026-11-21 23:01:49,549 | INFO | Finalizó un intento de reserva
+2026-11-21 23:04:22,551 | INFO | Reserva confirmada. Servicio=Alquiler de Laptop HP costo=100000.0
+2026-11-21 23:04:22,552 | INFO | Flujo de reserva finalizado sin excepciones
+2026-11-21 23:04:22,552 | INFO | Finalizó un intento de reserva
+2026-11-21 23:05:13,652 | INFO | Reserva confirmada. Servicio=Auditorio costo=750000.0
+2026-11-21 23:05:13,652 | INFO | Flujo de reserva finalizado sin excepciones
+2026-11-21 23:05:13,652 | INFO | Finalizó un intento de reserva
+2026-11-21 23:06:03,455 | INFO | Reserva confirmada. Servicio=Asesoría en instrumentación industrial costo=450000.0
+2026-11-21 23:06:03,455 | INFO | Flujo de reserva finalizado sin excepciones
+2026-11-21 23:06:03,514 | INFO | Finalizó un intento de reserva
